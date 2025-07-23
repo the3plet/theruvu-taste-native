@@ -1,12 +1,15 @@
+import { useColorScheme, View } from "react-native";
 import "./global.css";
-
 import { Stack } from "expo-router";
 
 export default function RootLayout() {
+  const theme = useColorScheme();
   return (
-    <Stack>
-      <Stack.Screen name="index" options={{ headerShown: true }} />
-      <Stack.Screen name="+not-found" />
-    </Stack>
+    <View className={theme === "dark" ? "dark flex-1" : "flex-1"}>
+      <Stack>
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="+not-found" />
+      </Stack>
+    </View>
   );
 }
