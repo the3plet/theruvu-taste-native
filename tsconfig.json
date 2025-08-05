@@ -1,6 +1,7 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
+      "types": ["nativewind/types", "react-native"],
     "strict": true,
     "paths": {
       "@/*": [
@@ -13,6 +14,6 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
-    "nativewind-env.d.ts"
-  ]
+    "nativewind-env.d.ts","app", "components", "nativewind.d.ts","declarations.d.ts"
+, "lib"  ]
 }

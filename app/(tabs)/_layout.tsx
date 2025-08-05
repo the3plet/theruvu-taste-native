@@ -1,12 +1,52 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { View, Text, useColorScheme } from "react-native";
+import { Octicons } from "@expo/vector-icons";
+import React from "react";
+import { Tabs } from "expo-router";
 
-const _Layout = () => {
+const Layout = () => {
+  const colorScheme = useColorScheme();
   return (
-    <View>
-      <Text>_layout</Text>
-    </View>
-  )
-}
+    <Tabs
+      screenOptions={{animation:'shift',
+        headerShown: false,
+        tabBarActiveTintColor: colorScheme === "dark" ? "#fff" : "#000",
+        tabBarInactiveTintColor: "gray",
+        tabBarStyle: { 
+          backgroundColor: colorScheme === "dark" ? "#000" : "#fff",
+          borderTopEndRadius:'10px'
+        },
+      }}
+    >
+      <Tabs.Screen
+        name="index"
+        options={{
+          title: "Home",
 
-export default _Layout
+          tabBarIcon: ({ color, size }) => (
+            <Octicons name="home" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="connect"
+        options={{
+          title: "Connect",
+          tabBarIcon: ({ color, size }) => (
+            <Octicons name="comment-discussion" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: "Profile",
+          tabBarIcon: ({ color, size }) => (
+            <Octicons name="person" size={size} color={color} />
+          ),
+        }}
+      />
+    </Tabs>
+  );
+};
+
+export default Layout;
