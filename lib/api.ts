@@ -10,4 +10,15 @@ axiosAPI.interceptors.request.use((config)=>{
     }
     return config
 })
+
+axiosAPI.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      // Token expired or invalid → Logout
+      useAuthStore.getState().signout();
+    }
+    return Promise.reject(error);
+  }
+);
 export default axiosAPI

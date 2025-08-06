@@ -1,4 +1,7 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
+import * as SecureStore from "expo-secure-store";
+ 
 type User = {
   name: string;
   email: string;
@@ -12,11 +15,32 @@ type AuthStore = {
   signout: () => void;
 };
 
-const useAuthStore = create<AuthStore>((set) => ({
-  user: null,
-  setUser: (user) => set({ user }),
-  signout: () => set({ user: null }),
-}));
+const secureStoreStorage = {
+  getItem: async (name: string) => {
+    const value = await SecureStore.getItemAsync(name);
+    return value ? JSON.parse(value) : null;
+  },
+  setItem: async (name: string, value: any) => {
+    await SecureStore.setItemAsync(name, JSON.stringify(value));
+  },
+  removeItem: async (name: string) => {
+    await SecureStore.deleteItemAsync(name);
+  },
+};
+
+const useAuthStore = create<AuthStore>()(
+  persist(
+    (set) => ({
+      user: null,
+      setUser: (user) => set({ user }),
+      signout: () => set({ user: null }),
+    }),
+    {
+      name: "auth-storage", // Key in SecureStore (can be anything)
+      storage: secureStoreStorage,
+    }
+  )
+);
 
 
 export default useAuthStore;

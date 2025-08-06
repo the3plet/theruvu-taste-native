@@ -69,7 +69,7 @@ const GetStartedModel = () => {
               </View>
               <Text className="text-2xl font-semibold">Get Started</Text>
               <Text className="text-neutral-500 font-medium">
-                Register to with us to add reviews, post media, share your
+                Register with us to add reviews, post media, share your
                 experience with others
               </Text>
             </View>

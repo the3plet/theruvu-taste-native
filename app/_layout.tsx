@@ -14,7 +14,7 @@ export default function RootLayout() {
       }}
     >
       <Stack.Screen
-        name="index"
+        name="home"
         
       />
 
@@ -29,6 +29,10 @@ export default function RootLayout() {
       {/* Auth group */}
       <Stack.Screen name="(auth)" options={{
         animation:'fade'
+      }}/>
+
+      <Stack.Screen name="(screens)" options={{
+        animation:'slide_from_bottom'
       }}/>
     </Stack>
   );
