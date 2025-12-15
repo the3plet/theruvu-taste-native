@@ -5,6 +5,7 @@ import { router } from "expo-router";
 import GetStartedModel from "@/components/GetStartedModel";
 
 export default function Index() {
+  
   return (
     <View className="flex-1">
       <ImageBackground source={GettingStarted} className="w-full h-full ">

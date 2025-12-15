@@ -9,4 +9,16 @@ export type FoodSpot = {
   averageRating: number;
   isOpen: boolean;
   ownerId: string;
+  totalReview:number;
 };
+
+export type FoodItem = {
+  id: string;
+  name: string;
+  price: number;
+  description:string
+  isAvailable: boolean;
+  imageUrl: string;
+  imagePublicId: string;
+  foodSpotId: string;
+}

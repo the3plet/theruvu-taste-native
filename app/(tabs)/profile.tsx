@@ -8,30 +8,31 @@ import {
   Vibration,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import * as Haptics from 'expo-haptics';
+import * as Haptics from "expo-haptics";
 
 const profile = () => {
-
-   const handleSignout = async () => {
+  const user = useAuthStore.getState().user;
+  const handleSignout = async () => {
     // Trigger haptic feedback (light tap)
     await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-    Vibration.vibrate(50); // ms
-    console.log('vibrarte')
+    // Vibration.vibrate(50); // ms
+    console.log("vibrarte");
 
     // Clear user state
     useAuthStore.getState().signout();
 
     // Navigate
-    router.replace('/(auth)');
+    router.replace("/");
   };
   return (
     <SafeAreaView>
       <Text>Profile</Text>
-      <TouchableOpacity
-        className="bg-black"
-        onPress={handleSignout}
-      >
-        <Text className="text-white">Signout</Text>
+      <TouchableOpacity className="bg-black" onPress={handleSignout}>
+        {user ? (
+          <Text className="text-white">Signout {user.name}</Text>
+        ) : (
+          <Text className="text-white">Signout </Text>
+        )}
       </TouchableOpacity>
     </SafeAreaView>
   );

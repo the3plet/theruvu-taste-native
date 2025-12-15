@@ -11,7 +11,7 @@ const tags: { name: any; title: string }[] = [
 ];
 const Searchbar = () => {
   const [search, setSearch] = useState<string>("");
-  const [selectedTag, setSelectedTag] = useState<string | null>(null);
+  const [selectedTag, setSelectedTag] = useState<string | null>('Hot');
  const user = useAuthStore.getState().user
   return (
     <View className="w-full  py-4 pb-2 rounded-b-3xl ">
@@ -36,7 +36,7 @@ const Searchbar = () => {
           const isSelected = selectedTag === item.title;
           return (
             <Pressable onPress={() => setSelectedTag(item.title)} >
-              <View className={`flex-row items-center gap-1  px-3 rounded-full py-1  ${isSelected ? 'bg-[#FF8C42]' : 'bg-[#ffffff]'} `}>
+              <View className={`flex-row items-center gap-1  px-3 rounded-full py-1  ${isSelected ? 'bg-[#ff8031]' : 'bg-[#ffffff]'} `}>
                 <MaterialCommunityIcons
                   name={item.name}
                   size={20}

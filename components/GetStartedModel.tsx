@@ -90,7 +90,7 @@ const GetStartedModel = () => {
                 title="Continue as Guest"
                 bg="[#EEEBEE]"
                 color="black"
-                url="/(tabs)"
+                url="/(tabs)/home"
               />
             </View>
           </Pressable>

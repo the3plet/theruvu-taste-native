@@ -1,9 +1,21 @@
 import { useColorScheme, View } from "react-native";
-import { Slot, Stack } from "expo-router";
+import { router, Slot, Stack, useSegments } from "expo-router";
 import "./globals.css";
+import useAuthStore from "@/store/auth";
+import { useEffect } from "react";
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
+  const segments = useSegments();
+  const user = useAuthStore.getState().user;
+
+  useEffect(() => {
+    if (!(segments.length > 0)) return;
+    if (user) {
+      router.replace("/(tabs)/home");
+    } else router.replace("/");
+  },[user]);
+
   return (
     <Stack
       screenOptions={{
@@ -13,11 +25,7 @@ export default function RootLayout() {
         },
       }}
     >
-      <Stack.Screen
-        name="home"
-        
-      />
-
+      <Stack.Screen name="index" /> 
       {/* Tabs group (no animation between tabs) */}
       <Stack.Screen
         name="(tabs)"
@@ -27,16 +35,12 @@ export default function RootLayout() {
       />
 
       {/* Auth group */}
-      <Stack.Screen name="(auth)" options={{
-        animation:'fade'
-      }}/>
-
-      <Stack.Screen name="(screens)" options={{
-        animation:'slide_from_bottom'
-      }}/>
+      <Stack.Screen
+        name="(auth)"
+        options={{
+          animation: "fade",
+        }}
+      />
     </Stack>
   );
 }
-
-
-

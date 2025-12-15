@@ -33,7 +33,7 @@ const LoginForm = () => {
           ...response.user,
           token: response.token,
         });
-        router.push('/(tabs)')
+        router.push('/(tabs)/home')
       }
     } catch (error:any) {
       console.log(error.response?.data || error.message);

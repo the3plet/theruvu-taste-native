@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   TouchableNativeFeedback,
   TouchableHighlight,
+  ActivityIndicator,
 } from "react-native";
 import React, { useCallback, useEffect, useState } from "react";
 import { foodspotService } from "@/lib/services/foodspotService";
@@ -38,9 +39,17 @@ const FoodCard = () => {
     getData();
   }, []);
 
-  console.log(foodspot[0]);
   return (
     <FlatList
+      ListEmptyComponent={
+       
+          <View className="items-center justify-center py-10">
+            <Text className="text-lg text-gray-500">
+              No menu Foodspot available
+            </Text>
+          </View>
+        
+      }
       className="flex-1 w-full"
       keyExtractor={(item) => item.id}
       refreshing={loading} // shows refresh spinner
@@ -49,7 +58,16 @@ const FoodCard = () => {
       ItemSeparatorComponent={() => <View style={{ height: 16 }} />}
       renderItem={({ item }) => {
         return (
-          <TouchableHighlight className="flex-1 p-4 pt-0 "  underlayColor="#F2F2F2" onPress={()=> router.push({pathname:'/home/foodspotdetails/[id]',params:{id:item.id}})}>
+          <TouchableHighlight
+            className="flex-1 p-4 pt-2 "
+            underlayColor="#F2F2F2"
+            onPress={() =>
+              router.push({
+                pathname: "/home/foodspotdetails/[id]",
+                params: { id: item.id },
+              })
+            }
+          >
             <View>
               <Image
                 source={{ uri: item?.imageUrl }}
@@ -60,9 +78,9 @@ const FoodCard = () => {
               <View className="flex-row justify-between pt-4">
                 <View>
                   <Text className="text-xl font-semibold">{item?.name}</Text>
-                  <Text className="text-lg font-light">{item?.location}</Text>
+                  <Text className="text-base font-light">{item?.location}</Text>
                   <Text
-                    className={`text-base  font-normal ${!item?.isOpen && "text-red-500 rounded  underline"} `}
+                    className={`text-sm  font-normal ${!item?.isOpen && "text-red-500 rounded  underline"} `}
                   >
                     {item?.isOpen === true
                       ? "Open"
@@ -73,10 +91,10 @@ const FoodCard = () => {
                   <View className="flex-row justify-end items-center">
                     <MaterialIcons name="star" size={20} className="" />
                     <Text className="text-xl font-normal items-center">
-                      {item?.averageRating}.00
+                      {item?.averageRating}
                     </Text>
                   </View>
-                  <Text className="text-base text-right font-normal items-center">
+                  <Text className="text-sm text-right font-normal items-center">
                     {item?.type}
                   </Text>
                 </View>

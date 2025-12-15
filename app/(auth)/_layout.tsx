@@ -9,7 +9,7 @@ const _Layout = () => {
   const user = useAuthStore.getState().user;
   useEffect(() => {
     if (user) {
-      router.replace("/(tabs)");
+      router.replace("/(tabs)/home");
     }
   }, [user]);
   return (

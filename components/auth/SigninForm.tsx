@@ -41,7 +41,7 @@ const SigninForm = () => {
         useAuthStore.getState().setUser({
             ...response.user,token:response.token
         })
-        router.push('/(tabs)')
+        router.push('/(tabs)/home')
     }
     console.log(response)
    } catch (error:any) {
